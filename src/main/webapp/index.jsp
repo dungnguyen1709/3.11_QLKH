@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Next Tab</title>
 </head>
 <body>
-
+<a href="/customers">Click</a>
 </body>
 </html>

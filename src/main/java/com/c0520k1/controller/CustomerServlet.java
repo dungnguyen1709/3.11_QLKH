@@ -31,10 +31,24 @@ public class CustomerServlet extends HttpServlet {
                 updateCustomer(request,response);
                 break;
             case "delete":
+                deleteCustomer(request,response);
                 break;
             default:
                 break;
         }
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id =  Integer.parseInt(request.getParameter("id"));
+        Customer customer = this.customerService.findById(id);
+        RequestDispatcher dispatcher;
+
+        if (customer == null) {
+            dispatcher = request.getRequestDispatcher("WEB-INF/views/error-404.jsp");
+        } else {
+            this.customerService.remove(id);
+        }
+        response.sendRedirect("/customers");
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,6 +100,7 @@ public class CustomerServlet extends HttpServlet {
                 showEditForm(request,response);
                 break;
             case "delete":
+                showDeleteForm(request,response);
                 break;
             case "view":
                 break;
@@ -93,6 +108,21 @@ public class CustomerServlet extends HttpServlet {
                 listCustomers(request, response);
                 break;
         }
+    }
+
+    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = this.customerService.findById(id);
+        RequestDispatcher dispatcher;
+
+        if (customer == null) {
+            dispatcher = request.getRequestDispatcher("WEB-INF/views/error-404.jsp");
+        } else {
+            request.setAttribute("customer",customer);
+            dispatcher = request.getRequestDispatcher("WEB-INF/views/customer/delete.jsp");
+        }
+
+        dispatcher.forward(request,response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
