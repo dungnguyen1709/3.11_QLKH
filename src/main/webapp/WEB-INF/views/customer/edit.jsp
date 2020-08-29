@@ -7,11 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <html>
 <head>
     <title>Edit customer</title>
 </head>
 <body>
+<div class="container">
 <h1>Edit customer</h1>
 <p>
     <c:if test="${requestScope['message'] != null}">
@@ -49,6 +51,6 @@
     </table>
 </fieldset>
 </form>
-
+</div>
 </body>
 </html>

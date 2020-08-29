@@ -7,17 +7,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Customer List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
 <h1>Customers</h1>
 <p>
     <a href="/customers?action=create">Create new customer</a>
 </p>
 
-<table border="1">
+<table class="table table-hover">
     <tr>
         <td>Name</td>
         <td>Email</td>
@@ -36,5 +39,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>

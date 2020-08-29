@@ -103,11 +103,27 @@ public class CustomerServlet extends HttpServlet {
                 showDeleteForm(request,response);
                 break;
             case "view":
+                viewCustomer(request,response);
                 break;
             default:
                 listCustomers(request, response);
                 break;
         }
+    }
+
+    private void viewCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = this.customerService.findById(id);
+        RequestDispatcher dispatcher;
+
+        if (customer == null) {
+            dispatcher = request.getRequestDispatcher("WEB-INF/views/error-404.jsp");
+        } else {
+            request.setAttribute("customer",customer);
+            dispatcher = request.getRequestDispatcher("WEB-INF/views/customer/views.jsp");
+        }
+
+        dispatcher.forward(request,response);
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
